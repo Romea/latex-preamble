@@ -1,439 +1,103 @@
-% Fix some error reporting
-\vfuzz2pt % Don't report over-full v-boxes if over-edge is small
-\hfuzz2pt % Don't report over-full h-boxes if over-edge is small
+%===============================
+%Packages
+%===============================
 
-% All the same, there are commands, classes and packages which are outdated and superseded.
-% nag provides routines to warn the user about the use of those.
-\usepackage[l2tabu,orthodox]{nag}
+\usepackage{times}
+% numbers option provides compact numerical references in the text. 
+%\usepackage[numbers]{natbib}
+\usepackage{multicol}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage{graphicx}
+\usepackage{subcaption}
 
-%==============================
-% BIBLIOGRAPHY
-%==============================
-
-% \addbibresource{references.bib} % in your preamble
-% \citet{key}, \citep{key} % in the document
-% \printbibliography % to generate the reference section
-\usepackage[
-    backend=bibtex,
-    style=ieee,
-    sorting=none,
-    natbib=true,
-    doi=false,
-    isbn=false,
-    url=false,
-    eprint=false,
-    maxcitenames=1,
-    mincitenames=1
-]{biblatex}
-
-\addbibresource{lib.bib}
-%==============================
-% TEXT
-%==============================
-
-% \autoref{key} % instead of Figure~\ref{key}, Table~\ref{key}, Equation~\ref{key}, or Section~\ref{key}
-\usepackage[pdftex,colorlinks]{hyperref}
-% fix names for autoref
-\def\sectionautorefname{Section}
-\def\subsectionautorefname{Section}
-\def\subsubsectionautorefname{Section}
-\newcommand*{\Appendixautorefname}{Appendix}
-
-% \acrodef{ICP}{Iterative Closest Point} % in the preamble
-% \ac{ICP} % in the document
-\usepackage[printonlyused]{acronym}
-
-% International unit system
-% e.g., \SI{1000}{\m\squared}, \num{20000}
-\usepackage{siunitx}
-\sisetup{group-separator = \text{\,}} % small space for thousand separator
-
-% avoid single line on a page or single line under a figure
-% no command to use
-\usepackage[all]{nowidow}
-
-% Colored text
-\usepackage[dvipsnames]{xcolor}
-
-% Fill the template with text
-\usepackage{lipsum}
-
-% Better command to make sure that people don't confuse lipsum text with real text
-\newcommand{\lightlipsum}[1][0]{\textcolor{gray!50}{\lipsum[#1]}}
-
-% Add i.e and e.g commands
-\usepackage{xspace} %smart handling of space in commands
-\newcommand{\ie}{i.e.,\xspace{}}
-\newcommand{\eg}{e.g.,\xspace{}}
-
-%==============================
-% FIGURE
-%==============================
-
-% Preferred figure format:
-% - pdf or eps for graphs and schemas
-% - jpg for photo
-% Don't use png as each compilation decompress the image, thus making compilation time
-% untolerable when there are more than 5 images...
-
-% \includegraphics[width=\textwidth]{filename}
-\usepackage[pdftex]{graphicx}
-
-% convert eps to pdf, you need to skip the file extension to work properly
-% \includegraphics{filename} % instead of \includegraphics{filename.eps}
-\usepackage{epstopdf}
-
-% for Inkscape figures, import tex files in other folder and keep paths coherent
-% e.g., \import{images}{timeline.pdf_tex}
-\usepackage{import}
-
-%==============================
-% TABLE
-%==============================
-
-% Cleaner spacing for tables
-% \toprule, \midrule, \bottomrule % instead of \hline
+\usepackage{tabularx}
 \usepackage{booktabs}
 
-% Tables that can fit page length
-\usepackage{tabularx}
-% Multirows and multicolumns in table
-\usepackage{multirow, multicol}
-
-%==============================
-% MATH
-%==============================
-
-% Better symbols
-\usepackage{amssymb,amsfonts,amsmath,amscd}
-
-% \bm % in equations for proper bold font
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{bm}
 
-% Some handy commands
-\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
-\newcommand{\abs}[1]{\left\vert#1\right\vert}
-\newcommand{\set}[1]{\left\{#1\right\}}
-\newcommand{\Real}{\mathbb R}
-\newcommand{\bbm}{\begin{bmatrix}}
-\newcommand{\ebm}{\end{bmatrix}}
+\usepackage{siunitx}
+\usepackage{microtype}
 
-\setlength\doublerulesep{0.01cm} % Table command
+\usepackage[
+backend=biber, 
+bibencoding=utf8,
+style=ieee, 
+sorting=none, 
+natbib=true, %maybe remove it and use textcite instead of citet
+doi=false, 
+isbn=false, 
+url=false, 
+eprint=false, 
+maxcitenames=1, 
+mincitenames=1,
+dashed=false
+]{biblatex}
 
+\usepackage{xspace}
+\newcommand{\ie}{i.e.,\xspace}
+\newcommand{\eg}{e.g.,\xspace}
 
+\usepackage[printonlyused]{acronym}
+\acrodef{ICP}{Iterative Closest Point}
+\acrodef{GNSS}{Global Navigation Satellite System}
+\acrodef{HMI}{Hazardously Misleading Information}
 
-\newcommand{\ignore}[1]{}
-\newcommand{\etal}[0]{{\em et~al.\@}\xspace}
-\newcommand{\colour}[2]{\color{#1}{#2}\color{black}\xspace} % : red, green, blue, cyan, magenta, yellow, black, gray, white, darkgray, lightgray, brown, lime, olive, orange, pink, purple, teal, violet.
-\newcommand{\thline}{\begin{center} \rule{\linewidth}{0.5mm} \\ \end{center}}
-\newcommand{\wrt}{w.r.t.\xspace}
+%===============================
+%review shortcuts
+%to comment before submission
+%===============================
+\usepackage{lipsum}
+\usepackage[dvipsnames]{xcolor}
 
-%% Operators
-\newcommand{\pd}[2]{{\frac{\partial #1}{\partial #2}}} % Partial derivative
-\newcommand{\mc}[1]{\mathcal{#1}}  
+\newcommand{\lightlipsum}[1][0]{\textcolor{gray!50}{\lipsum[#1]}}
 
-%% Matrix shortcuts
-\newcommand{\bma}[1]{\left[\begin{array}{#1}}
-\newcommand{\ema}{\end{array}\right]}
+%===============================
+%math shortcuts
+%===============================
 
-% Basic bold for letters and symbols
-\DeclareMathAlphabet{\mbf}{OT1}{ptm}{b}{n}
-\newcommand{\mbs}[1]{{\boldsymbol{#1}}}
-\newcommand{\mbm}[1]{ \textbf{\textit{#1}} } % {\bm #1}
-\newcommand{\mbc}[1]{ \boldsymbol{\mathcal{#1}} } 
+%enlarge matrices so that brackets match 
+%\def\arraystretch{1.3}
 
-% helper bold symbols
-\newcommand{\mbsdot}[1]{{\dot{\boldsymbol{#1}}}}
-\newcommand{\mbsbar}[1]{{\bar{\boldsymbol{#1}}}}
-\newcommand{\mbshat}[1]{{\hat{\boldsymbol{#1}}}}
-\newcommand{\mbsvec}[1]{{\underrightarrow{\boldsymbol{#1}}}}
-\newcommand{\mbsdel}[1]{{\delta {\boldsymbol{#1}}}}
-\newcommand{\mbstilde}[1]{{\tilde{\boldsymbol{#1}}}}
-\newcommand{\mbfdot}[1]{{\dot{\mbf{#1}}}}
-\newcommand{\mbfbar}[1]{{\bar{\mbf{#1}}}}
-\newcommand{\mbfhat}[1]{{\hat{\mbf{#1}}}}
-\newcommand{\mbfvec}[1]{{\underrightarrow{\mbf{#1}}}}
-\newcommand{\mbfdel}[1]{{\delta{\mbf{#1}}}}
-\newcommand{\mbftilde}[1]{{\tilde{\mbf{#1}}}}
-\newcommand{\mbfch}[1]{{\check{\mbf{#1}}}}
-\newcommand{\mbsch}[1]{{\check{\boldsymbol{#1}}}}
-\newcommand{\mbfcheck}[1]{{\check{\mbf{#1}}}}
+%generic matrices
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\bx}{\bm{x}}
+\newcommand{\ba}{\bm{a}}
+\newcommand{\hbx}{\hat{\bm{x}}}
+\newcommand{\by}{\bm{y}}
+\newcommand{\Bf}{\bm{f}}
+\newcommand{\bg}{\bm{g}}
+\newcommand{\bw}{\bm{w}}
+\newcommand{\bb}{\bm{b}}
+\newcommand{\be}{\bm{e}}
+\newcommand{\bp}{\bm{p}}
+\newcommand{\bq}{\bm{q}}
+\newcommand{\bn}{\bm{n}}
+\newcommand{\bt}{\bm{t}}
+\newcommand{\bphi}{\bm{\phi}}
+\newcommand{\bA}{\bm{A}}
+\newcommand{\bI}{\bm{I}}
+\newcommand{\bW}{\bm{W}}
+\newcommand{\bQ}{\bm{Q}}
+\newcommand{\bD}{\bm{g}^T}
+\newcommand{\bH}{\bm{H}}
+\newcommand{\bT}{\bm{T}}
+\newcommand{\bR}{\bm{R}}
+\newcommand{\bSigma}{\bm{\Sigma}}
+\newcommand{\bSigmaAlpha}{\bm{\Sigma}_\alpha}
 
-% A reference frame definition
-% \newcommand{\rframe}[1]{{\ensuremath \underrightarrow{\mathcal{F}}_{#1}}}
-\newcommand{\rframe}[1]{{\ensuremath{\mathcal{F}}_{#1}}}
-\newcommand{\vectrix}[1]{\ensuremath \underrightarrow{\boldsymbol{\mathcal{F}}}_{#1}}
-\newcommand{\nvectrix}{{\ensuremath \underrightarrow{\boldsymbol{\mathcal{O}}}}}
-%\def\dota{{\raisebox{-2pt}{\LARGE $\cdot$}}}
-%\def\dotb{{\raisebox{-0.6ex}{ \kern0.2ex\raisebox{0.8ex}{\tiny $\circ$}}}}
-%\def\ddota{{\raisebox{-0.6ex}{ \raise0.2ex\hbox{ \LARGE $\cdot\hspace*{-0.2ex}\cdot$}}}}
-%\def\ddotb{{\raisebox{-0.6ex}{ \kern0.2ex\raisebox{0.8ex}{\tiny $\circ\circ$}}}}
-\def\fdota{{\raisebox{-2pt}{\LARGE $\cdot$}}}
-% \def\fdotb{{\raisebox{-0.6ex}{ \kern0.2ex\raisebox{0.8ex}{\tiny $\circ$}}}}
-\def\fdotb{{\raisebox{-0.6ex}{ \kern0.2ex\raisebox{0.8ex}{\tiny $\hspace*{-1ex}\circ$}}}}
-% \def\fddota{{\raisebox{-0.6ex}{ \raise0.2ex\hbox{ \LARGE $\cdot\hspace*{-0.2ex}\cdot$}}}}
-\def\fddota{{\raisebox{-2pt}{\LARGE $\cdot\hspace*{-0.2ex}\cdot$}}}
-% \def\fddotb{{\raisebox{-0.6ex}{ \kern0.2ex\raisebox{0.8ex}{\tiny $\circ\circ$}}}}
-\def\fddotb{{\raisebox{-0.6ex}{ \kern0.2ex\raisebox{0.8ex}{\tiny $\hspace*{-1ex}\circ\circ$}}}}
-% \newcommand{\fdot}[1]{{\fdota{#1}}}
-% \newcommand{\dota}[1]{ {#1}^{ \mbox{ \LARGE $\cdot$} } }
-% \newcommand{\fdot}[1]{{^{\fdota{\mbox{\footnotesize${#1}$}}}}}
-\newcommand{\fdot}[1]{{^{\fdota{\mbox{\scriptsize${#1}$}}}}}
-% \newcommand{\fddot}[1]{{^{\fddota{\mbox{\footnotesize${#1}$}}}}}
-\newcommand{\fddot}[1]{{^{\fddota{\mbox{\scriptsize${#1}$}}}}}
-\newcommand{\pspace}{\mathbb{P}} 
-\newcommand{\vecnorm}[1]{||{\underrightarrow{{#1}}}||_2}
-
-
-\newcommand{\p}{\partial}
-\newcommand{\f}{\frac}
-\newcommand{\smallf}[2]{\mbox{$\textstyle{\frac{#1}{#2}}$}}
-% \newcommand{\innerp}[3]{\left<#1,#2\right>_{#3}}
-% \newcommand{\innerp}[3]{\left\langle #1,#2 \right\rangle_{#3}}
-\newcommand{\innerp}[2]{\left\langle #1 , #2 \right\rangle}
-% \newcommand{\norm}[2]{\left| #1 \right|_{#2}}
-\newcommand{\ura}[1]{{\underrightarrow{{#1}}}}
-\newcommand{\dt}{\mathrm{d}t} 
-\newcommand{\dee}{\textrm{d}}
-\newcommand{\mcL}[1]{\mathcal{L}\left\{#1\right\}}
-% \newcommand{\ubar}[1]{\stackunder[1.2pt]{$#1$}{\rule{.8ex}{.075ex}}}
-\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
-
-
-\newcommand{\trans}{{\ensuremath{\mathsf{T}}}} % transpose
-\newcommand{\herm}{{\ensuremath{\mathsf{H}}}} % 
-% \newcommand{\utimes}{{\ensuremath{\mathsf{v}}}} % 
-\newcommand{\utimes}{ {\raisebox{-0.6ex}{ \kern-1.0ex\raisebox{0.6ex}{ \small $\mathsf{v}$}}} } % 
-\newcommand{\fouriert}[1]{ \texttt{F} \left\{ {#1} \right\} } % ourier transform
-\newcommand{\invfouriert}[1]{ \texttt{F}^{-1} \left\{ {#1} \right\} } % inverse % Fourier transform
-\newcommand{\laplacet}[1]{ \texttt{L} \left\{ {#1} \right\} } % 
-\newcommand{\invlaplacet}[1]{ \texttt{L}^{-1} \left\{ {#1} \right\} } % 
-\newcommand{\trace}{ {\ensuremath{\mathrm{tr}}} } % \trace
-\newcommand{\rk}{{\ensuremath{\mathrm{rk}}}} % rank
-\newcommand{\cone}{{\ensuremath{\mathrm{cone}}}}
-% \newcommand{\exp}[1]{  \ensuremath{\mathrm{exp}} \left( {#1} \right) }
-% \newcommand{\span}{ {\ensuremath{\mathrm{span}}} }
-
-\newcommand{\onehalf}{\mbox{$\textstyle{\frac{1}{2}}$}}
-\newcommand{\onequarter}{\mbox{$\textstyle{\frac{1}{4}}$}}
-\newcommand{\invtwopi}{\mbox{$\textstyle{\frac{1}{2 \pi}}$}} 
-\newcommand{\beq}{\begin{equation}}
-\newcommand{\eeq}{\end{equation}}
-\newcommand{\bdis}{\begin{displaymath}}
-\newcommand{\edis}{\end{displaymath}}
-\newcommand{\beqarray}{\begin{eqnarray}}
-\newcommand{\eeqarray}{\end{eqnarray}}
-\newcommand{\beqarraynn}{\begin{eqnarray*}}
-\newcommand{\eeqarraynn}{\end{eqnarray*}}
-
-\newcommand{\cross}{\times}
-\newcommand{\eye}{\mbf{1}}
-\newcommand{\vect}[1]{\underrightarrow{#1}}
-
-%% Lie stuff
-\DeclareMathOperator{\Exp}{Exp}
-\DeclareMathOperator{\Log}{Log}
-
-%% Lie group shortcuts
-\newcommand{\SEtwothree}[3]{\bbm #1 & #2 & #3 \\ \mbf{0} & 1 & 0\\ \mbf{0} & 0 & 1 \ebm}
-\newcommand{\SEtwothreebias}[5]{\bbm #1 & #2 & #3 & & & \\
-    & 1 & & & &\\
-    & & 1 & & & \\
-    & & & \eye & #4 & #5 \\
-    & & & & 1 & \\
-    & & & & & 1\ebm}
-
-%% Sep err shortcuts
-\newcommand{\SEPvsub}[1]{\mbfbar{v}_{#1} - \delta\xiv_{#1}}
-\newcommand{\SEPrsub}[1]{\mbfbar{r}_{#1} - \delta\xir_{#1}}
-\newcommand{\bsub}[1]{\bbar_{#1} - \delta\xib_{#1}}
-\newcommand{\bgsub}[1]{\bgbar_{#1} - \delta\xibg_{#1}}
-\newcommand{\basub}[1]{\babar_{#1} - \delta\xiba_{#1}}
-
-%% LI err shortcuts
-\newcommand{\LIdcmerr}[1]{\delta \dcm_{#1}^L = \dcmt_{#1} \dcmbar_{#1}}
-\newcommand{\LIdcmsub}[1]{\dcmbar_{#1}\del \dcmt_{#1}}
-\newcommand{\LIdcmsubt}[1]{\delta \dcm_{#1}\dcmbart_{#1}}
-
-%% RI err shortcuts
-\newcommand{\RIdcmerr}[1]{\delta \dcm_{#1}^R = \dcmbar_{#1}\dcmt_{#1}}
-
-%% Approximations
-\newcommand{\eyepxi}[1]{\eye + \delta #1^\wedge}
-\newcommand{\eyemxi}[1]{\eye - \delta #1^\wedge}
-
-% Element references
-\newcommand{\dcmgt}{\dcm_\gt}
-\newcommand{\dcmbar}{\mbfbar{C}}
-\newcommand{\dcmt}{\dcm^\trans}
-\newcommand{\dcmbart}{\dcmbar^\trans}
-\newcommand{\dcmcheckt}{\dcmcheck^\trans}
-\newcommand{\dcmcheckbar}{\bar{\mbfcheck{C}}}
-\newcommand{\dcmcheckbart}{\dcmcheckbar^\trans}
-\newcommand{\dcmdott}{\dcmdot^\trans}
-\newcommand{\dcmtilde}{\mbftilde{C}}
-\newcommand{\dcmtildet}{\dcmtilde^\trans}
-\newcommand{\dcmgtt}{\dcmt_\gt}
-\newcommand{\dcmbardot}{\dot{\dcmbar}}
-\newcommand{\mbscheck}[1]{\ensuremath{\check{\boldsymbol{#1}}}}
-
-
-\newcommand{\vel}{\mbf{v}}
-\newcommand{\vbar}{\mbfbar{v}}
-\newcommand{\vdot}{\mbfdot{v}}
-\newcommand{\vcheck}{\mbfcheck{v}}
-\newcommand{\vcheckbar}{\bar{\mbfcheck{v}}}
-\newcommand{\vgt}{\vel_\gt}
-\newcommand{\pos}{\mbf{r}}
-\newcommand{\rbar}{\mbfbar{r}}
-\newcommand{\rdot}{\mbfdot{r}}
-\newcommand{\rcheck}{\mbfcheck{r}}
-\newcommand{\rcheckbar}{\bar{\mbfcheck{r}}}
-\newcommand{\rgt}{\pos_\gt}
-\newcommand{\bias}{\mbf{b}}
-\newcommand{\btilde}{\mbftilde{b}}
-\newcommand{\bbar}{\mbfbar{b}}
-\newcommand{\bdot}{\mbfdot{b}}
-\newcommand{\bcheck}{\mbfcheck{b}}
-\newcommand{\bgt}{\bias_\gt}
-\newcommand{\bg}{\bias^g}
-\newcommand{\bgbar}{\bbar^g}
-\newcommand{\bgdot}{\bdot^g}
-\newcommand{\bgcheck}{\bcheck^g}
-\newcommand{\bcheckbar}{\bar{\mbfcheck{b}}}
-\newcommand{\bggt}{\bg_\gt}
-\newcommand{\bgtilde}{\btilde^g}
-\newcommand{\ba}{\bias^a}
-\newcommand{\babar}{\bbar^a}
-\newcommand{\badot}{\bdot^a}
-\newcommand{\bacheck}{\bcheck^a}
-\newcommand{\bagt}{\ba_\gt}
-\newcommand{\batilde}{\btilde^a}
-
-\newcommand{\xibs}{\mbs{\xi}}
-\newcommand{\xicheck}{\mbscheck{\xi}}
-\newcommand{\xidot}{\mbsdot{\xi}}
-\newcommand{\xibar}{\mbsbar{\xi}}
-\newcommand{\xiphi}{\mbs{\xi}^{\phi}}
-\newcommand{\xicheckphi}{\xicheck^{\phi}}
-\newcommand{\xiphiwed}{\mbs{\xi}^{\phi^\wedge}}
-\newcommand{\xiphicross}{\mbs{\xi}^{\phi^\cross}}
-\newcommand{\xiphidot}{\mbsdot{\xi}^\phi}
-\newcommand{\xiphidotcross}{\mbsdot{\xi}^{\phi^\cross}}
-\newcommand{\xir}{\mbs{\xi}^{\mbf{r}}}
-\newcommand{\xicheckr}{\xicheck^{\mbf{r}}}
-\newcommand{\xirdot}{\mbsdot{\xi}^{\mbf{r}}}
-\newcommand{\xiv}{\mbs{\xi}^{\mbf{v}}}
-\newcommand{\xicheckv}{\xicheck^{\mbf{v}}}
-\newcommand{\xivdot}{\mbsdot{\xi}^{\mbf{v}}}
-\newcommand{\xib}{\mbs{\xi}^{\bias}}
-\newcommand{\xicheckb}{\xicheck^{\bias}}
-\newcommand{\xibdot}{\mbsdot{\xi}^{\mbf{b}}}
-\newcommand{\xibg}{\mbs{\xi}^{\bg}}
-\newcommand{\xicheckbg}{\xicheck^{\bg}}
-\newcommand{\xibgdot}{\mbsdot{\xi}^{\bg}}
-\newcommand{\xiba}{\mbs{\xi}^{\ba}}
-\newcommand{\xicheckba}{\xicheck^{\ba}}
-\newcommand{\xibadot}{\mbsdot{\xi}^{\ba}}
-
-
-\newcommand{\e}{\mbf{e}}
-\newcommand{\ebar}{\mbfbar{e}}
-\newcommand{\etilde}{\mbftilde{e}}
-\newcommand{\ephi}{\mbf{e}^{\phi}}
-\newcommand{\ephibar}{\mbfbar{e}^{\phi}}
-\newcommand{\ev}{\mbf{e}^{\mbf{v}}}
-\newcommand{\evbar}{\mbfbar{e}^{\mbf{v}}}
-\newcommand{\er}{\mbf{e}^{\mbf{r}}}
-\newcommand{\erbar}{\mbfbar{e}^{\mbf{r}}}
-\newcommand{\eb}{\mbf{e}^{\bias}}
-\newcommand{\ebbar}{\mbfbar{e}^{\bias}}
-\newcommand{\ebg}{\mbf{e}^{\bg}}
-\newcommand{\ebgbar}{\mbfbar{e}^{\bg}}
-\newcommand{\eba}{\mbf{e}^{\ba}}
-\newcommand{\ebabar}{\mbfbar{e}^{\ba}}
-
-%% RMI stuff
-\newcommand{\RMIX}{\Delta\mathcal{X}}
-\newcommand{\RMIXdot}{\Delta\mbfdot{X}}
-\newcommand{\RMIXtilde}{\Delta\mbftilde{X}}
-\newcommand{\RMIXinv}{\RMIX^{-1}}
-\newcommand{\RMIXbar}{\Delta\mbfbar{X}}
-\newcommand{\RMIXbarinv}{\Delta\mbfbar{X}^{-1}}
-
-\newcommand{\RMIdcm}{\Delta\dcm}
-\newcommand{\RMIdcmt}{\Delta\dcmt}
-\newcommand{\RMIdcmbar}{\Delta\dcmbar}
-\newcommand{\RMIdcmbart}{\Delta\dcmbart}
-\newcommand{\RMIdcmtilde}{\Delta\dcmtilde}
-\newcommand{\RMIdcmtildet}{\Delta\dcmtildet}
-
-\newcommand{\RMIv}{\Delta\mbf{v}}
-\newcommand{\RMIvbar}{\Delta\mbfbar{v}}
-\newcommand{\RMIvtilde}{\Delta\mbftilde{v}}
-\newcommand{\RMIvcross}{\Delta\mbf{v}^\cross}
-\newcommand{\RMIvbarcross}{\Delta\mbfbar{v}^\cross}
-\newcommand{\RMIr}{\Delta\mbf{r}}
-\newcommand{\RMIrtilde}{\Delta\mbftilde{r}}
-\newcommand{\RMIrbar}{\Delta\mbfbar{r}}
-\newcommand{\RMIrbarcross}{\Delta\mbfbar{r}^\cross}
-\newcommand{\RMIrcross}{\Delta\mbf{r}^\cross}
-\newcommand{\RMIb}{\Delta\bias}
-\newcommand{\RMIbbar}{\Delta\bbar}
-\newcommand{\RMIbg}{\Delta\bg}
-\newcommand{\RMIbgbar}{\Delta\bgbar}
-\newcommand{\RMIba}{\Delta\ba}
-\newcommand{\RMIbabar}{\Delta\babar}
-\newcommand{\RMIdt}[2]{\Delta t_{#1#2}}
-\newcommand{\RMIvdeff}[2]{\dcmt_{#1}(\mbf{v}_#2 - \mbf{v}_#1 - \grav\RMIdt{#1}{#2})}
-\newcommand{\RMIrdeff}[2]{\dcmt_{#1}(\mbf{r}_#2 - \mbf{r}_#1 - \mbf{v}_{#1}\RMIdt{#1}{#2} - \onehalf\grav\RMIdt{#1}{#2}^2)}
-
-%% Shortcuts
-\newcommand{\kmin}{{k-1}}
-\newcommand{\gt}{{\mathrm{gt}}}
-\newcommand{\grav}{\mbf{g}}
-\newcommand{\Deltat}{\Delta t}
-\newcommand{\zero}{\mbf{0}}
-\newcommand{\MLGbiasdef}{SE_2(3) \times \mathbb{R}^3 \times \mathbb{R}^3}
-\newcommand{\mbfcheckbar}[1]{\bar{\mbfcheck{#1}}}
-
-%% Jacobian reference shortcuts
-\newcommand{\J}{\mathbf{J}}
-\newcommand{\Jgroup}{\mbs{\mathcal{J}}}
-\newcommand{\JCC}{\J_{\dcm}^{\dcm}}
-\newcommand{\JCv}{\J_{\mbf{v}}^{\dcm}}
-\newcommand{\JCr}{\J_{\mbf{r}}^{\dcm}}
-\newcommand{\JCb}{\J_{\bias}^{\dcm}}
-\newcommand{\JCbg}{\J_{\bg}^{\dcm}}
-\newcommand{\JCba}{\J_{\ba}^{\dcm}}
-\newcommand{\JRMICbg}{\J_{\bg}^{\RMIdcm}}
-\newcommand{\JRMICba}{\J_{\ba}^{\RMIdcm}}
-
-\newcommand{\JvC}{\J_{\dcm}^{\mbf{v}}}
-\newcommand{\Jvv}{\J_{\mbf{v}}^{\mbf{v}}}
-\newcommand{\Jvr}{\J_{\mbf{r}}^{\mbf{v}}}
-\newcommand{\Jvb}{\J_{\bias}^{\mbf{v}}}
-\newcommand{\Jvbg}{\J_{\bg}^{\mbf{v}}}
-\newcommand{\Jvba}{\J_{\ba}^{\mbf{v}}}
-\newcommand{\JRMIvbg}{\J_{\bg}^{\RMIv}}
-\newcommand{\JRMIvba}{\J_{\ba}^{\RMIv}}
-
-\newcommand{\JrC}{\J_{\dcm}^{\mbf{r}}}
-\newcommand{\Jrv}{\J_{\mbf{v}}^{\mbf{r}}}
-\newcommand{\Jrr}{\J_{\mbf{r}}^{\mbf{r}}}
-\newcommand{\Jrb}{\J_{\bias}^{\mbf{r}}}
-\newcommand{\Jrbg}{\J_{\bg}^{\mbf{r}}}
-\newcommand{\Jrba}{\J_{\ba}^{\mbf{r}}}
-\newcommand{\JRMIrbg}{\J_{\bg}^{\RMIr}}
-\newcommand{\JRMIrba}{\J_{\ba}^{\RMIr}}
-
-\DeclareMathAlphabet{\mbf}{OT1}{ptm}{b}{n}
+%useful commands
+\renewcommand{\P}[1]{p\left(#1\right)}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\DeclareMathOperator{\nullspacenp}{null}
+\newcommand{\nullspace}[1]{ \nullspacenp\left( #1 \right)}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
-%% Formatting
-\newcommand{\spliteq}{\nonumber \\ \spliteqindent}
-\newcommand{\spliteqindent}{&\qquad\qquad\qquad}
-\newcommand{\scalebrack}[1]{\left(#1\right)}
+\DeclareMathOperator{\sign}{sgn}
 
-\newcommand{\diag}{{\ensuremath{\mathrm{diag}}}}
-\newcommand{\dcm}{\mbf{C} }
+%proof environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}{Lemma}
+\newcommand{\lemmaautorefname}{Lemma}
