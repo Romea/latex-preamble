@@ -51,7 +51,9 @@ dashed=false
 \usepackage{lipsum}
 \usepackage[dvipsnames]{xcolor}
 
-\newcommand{\lightlipsum}[1][0]{\textcolor{gray!50}{\lipsum[#1]}}
+\newcommand{\graytext}[1]{\textcolor{gray!60}{#1}}
+\newcommand{\lightlipsum}[1][1]{\graytext{\lipsum[#1]}}
+
 
 %===============================
 %math shortcuts
