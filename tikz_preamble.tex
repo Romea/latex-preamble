@@ -1,0 +1,60 @@
+
+\usepackage{graphicx} % for \rotatebox
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{tikz}
+
+% \pgfdeclarelayer{bg}    % declare background layer
+% \pgfsetlayers{bg,main}  % set the order of the layers (main is the standard layer)
+
+
+\usetikzlibrary{calc,trees,positioning,arrows.meta,shapes.geometric,%
+    decorations.pathreplacing,decorations.pathmorphing,shapes,%
+    matrix,shapes.symbols, bending}
+
+
+\tikzset{
+  >={Stealth[length=2mm, width=2mm,round]},
+%
+  Mvariable/.style={
+      align=center
+    },
+  filter/.style={
+    rectangle, 
+    rounded corners, 
+    fill=black!10,
+    draw=black, very thick,
+    text width=6em, 
+    minimum height=3em, 
+    text centered},
+  link/.style={
+    -latex,
+    ultra thick
+  }, 
+  connector/.style={
+	circle,
+	fill=black,
+	inner sep=0pt,
+	minimum size=7pt
+  },
+  comparator/.style={
+    circle,
+	draw,
+    fill=black!10,
+	thick,
+    minimum size=1cm,
+    inner sep=0pt,
+    path picture={
+      % cross
+      \draw (path picture bounding box.north west) --
+            (path picture bounding box.south east);
+      \draw (path picture bounding box.south west) --
+            (path picture bounding box.north east);
+      % plus and minus
+		\node at (path picture bounding box.north) [yshift=-6pt] {$\bm{+}$};
+		\node at (path picture bounding box.south) [yshift=6pt]  {$\bm{-}$};
+    }
+  }
+}
+
+
