@@ -3,8 +3,6 @@
 %===============================
 
 \usepackage{times}
-% numbers option provides compact numerical references in the text. 
-%\usepackage[numbers]{natbib}
 \usepackage{multicol}
 \usepackage[bookmarks=true]{hyperref}
 \usepackage{graphicx}
@@ -21,18 +19,20 @@
 \usepackage{microtype}
 
 \usepackage[
-backend=biber, 
-bibencoding=utf8,
-style=ieee, 
-sorting=none, 
-natbib=true, %maybe remove it and use textcite instead of citet
-doi=false, 
-isbn=false, 
-url=false, 
-eprint=false, 
-maxcitenames=1, 
-mincitenames=1,
-dashed=false
+	backend=biber, 
+	bibencoding=utf8,
+	style=ieee, 
+	sorting=none, 
+	% natbib is loaded only for backward compatibility. 
+	% prefer \textcite over \citet.
+	natbib=true, 
+	doi=false, 
+	isbn=false, 
+	url=false, 
+	eprint=false, 
+	maxcitenames=1, 
+	mincitenames=1,
+	dashed=false
 ]{biblatex}
 
 \usepackage{xspace}
